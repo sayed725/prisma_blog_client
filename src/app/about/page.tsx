@@ -1,17 +1,7 @@
-
-export const dynamic = "force-dynamic";
-
-const AboutPage = async() => {
-
-
- await new Promise((resolve)=> setTimeout(resolve,4000))
-
-//  throw new Error("Something went Wrong")
-
-
+export default function AboutPage() {
   return (
-    <div>AboutPage</div>
-  )
+    <div>
+      <h1> This is AboutPage </h1>
+    </div>
+  );
 }
-
-export default AboutPage
