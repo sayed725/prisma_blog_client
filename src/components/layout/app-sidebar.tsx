@@ -1,5 +1,6 @@
 import * as React from "react";
 
+
 import {
   Sidebar,
   SidebarContent,
@@ -14,36 +15,37 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 
-// This is sample data.
-const data = {
-  versions: [],
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "User Dashboard",
-          url: "/dashboard",
-        },
-        {
-          title: "Admin Dashboard",
-          url: "/admin-dashboard",
-        },
-      ],
-    },
-  ],
-};
+import { Route } from "@/types";
+import { adminRoutes } from "@/routes/adminRoute";
+import { userRoutes } from "@/routes/userRoute";
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({
+  user,
+  ...props
+}: {
+  user: { role: string } & React.ComponentProps<typeof Sidebar>;
+}) {
+  let routes: Route[] = [];
+
+  switch (user.role) {
+    case "admin":
+      routes = adminRoutes;
+      break;
+    case "user":
+      routes = userRoutes;
+      break;
+    default:
+      routes = [];
+      break;
+  }
+
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
+        <SidebarHeader>
         <h2 className="py-2 text-2xl text-blue-600">Next.js Blog App</h2>
       </SidebarHeader>
       <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
+        {routes.map((item) => (
           <SidebarGroup key={item.title}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
