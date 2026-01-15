@@ -1,0 +1,7 @@
+export default function UserDashboard() {
+    return (
+        <div>
+            <h1> This is UserDashboard </h1>
+        </div>
+    );
+}
