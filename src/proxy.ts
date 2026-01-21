@@ -3,7 +3,6 @@ import { NextRequest } from "next/server";
 import { userServices } from "./services/user.service";
 import { Roles } from "./constants/roles";
 
-// This function can be marked `async` if using `await` inside
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   let isAuthenticated = false;
@@ -22,7 +21,7 @@ export async function proxy(request: NextRequest) {
   }
 
   //* User is authenticated and role = ADMIN
-  //* User can not visit user dashboard
+  //* Admin can not visit user dashboard
   if (isAdmin && pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/admin-dashboard", request.url));
   }
