@@ -1,27 +1,33 @@
-
 //! This can be used only in client component
 // import { useParams } from "next/navigation";
 
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { blogService } from "@/services/blog.service";
+import { BlogPost } from "@/types";
+
+//* [ { id: asdfasdfasd }, {id : asdfasdadsfa}, {id: asdfasdfasfasd} ]
 
 
 
+export async function generateStaticParams() {
+  const { data } = await blogService.getBlogPosts();
 
+  return data?.data?.map((blog: BlogPost) => ({ id: blog.id })).splice(0, 3);
+}
 
+export default async function BlogsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
 
+  const { data: blog } = await blogService.getBlogById(id);
 
+  //    console.log(data)
 
-export default async function BlogsPage({ params }: {params:Promise<{id: string}>}) {
-
-   const { id } = await params;
-
-   const { data: blog } = await blogService.getBlogById(id)
-
-//    console.log(data)
-
-    const formattedDate = new Date(blog.createdAt).toLocaleDateString("en-US", {
+  const formattedDate = new Date(blog.createdAt).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -31,13 +37,10 @@ export default async function BlogsPage({ params }: {params:Promise<{id: string}
   const wordCount = blog.content.split(/\s+/).length;
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
+  // console.log(id)
 
-
-
-    // console.log(id)
-
-    return (
-         <article className="container mx-auto px-4 py-12 max-w-2xl">
+  return (
+    <article className="container mx-auto px-4 py-12 max-w-2xl">
       {/* Header */}
       <header className="mb-8">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
@@ -88,8 +91,8 @@ export default async function BlogsPage({ params }: {params:Promise<{id: string}
         </div>
       </footer>
     </article>
-    );
+  );
 }
 
 //! This can be used only in client component
-    // const { id } = useParams();
+// const { id } = useParams();

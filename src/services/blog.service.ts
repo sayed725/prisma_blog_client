@@ -18,7 +18,7 @@ interface GetBlogsParams {
 
 export const blogService = {
   getBlogPosts: async function (
-    params: GetBlogsParams,
+    params?: GetBlogsParams,
     options?: ServiceOptions,
   ) {
     try {
