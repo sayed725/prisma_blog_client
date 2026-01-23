@@ -15,7 +15,7 @@ export async function proxy(request: NextRequest) {
     isAdmin = data.user.role === Roles.admin;
   }
 
-  //* User in not authenticated at all
+  //* User in not authenticated 
   if (!isAuthenticated) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
