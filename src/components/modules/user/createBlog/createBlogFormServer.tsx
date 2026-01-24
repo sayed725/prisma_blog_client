@@ -46,10 +46,10 @@ export default function CreateBlogFormServer() {
       body: JSON.stringify(blogData),
     });
 
-    // if (res.ok) {
-    //   revalidateTag("blogPosts", "max");
-    //   // updateTag("blogPosts"); // Use either one of them
-    // }
+    if (res.ok) {
+      revalidateTag("blogPosts", "max");
+      // updateTag("blogPosts"); // Use either one of them
+    }
   };
 
   return (
