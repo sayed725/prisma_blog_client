@@ -16,7 +16,7 @@ export default async function Home() {
   // console.log(data);
 
   return (
-    <div className="grid grid-cols-3 max-w-7xl mx-auto px-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto px-4 gap-6">
       {data?.data?.map((post: BlogPost) => (
         <BlogCard key={post.id} post={post} />
       ))}
