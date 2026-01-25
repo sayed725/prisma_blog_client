@@ -13,6 +13,7 @@ export default function HistoryTable({ posts }: { posts: BlogPost[] }) {
   return (
     <div className="border rounded-md">
       <Table>
+        
         <TableHeader>
           <TableRow>
             <TableHead>Title</TableHead>
