@@ -1,6 +1,4 @@
 import * as React from "react";
-
-
 import {
   Sidebar,
   SidebarContent,
@@ -40,10 +38,9 @@ export function AppSidebar({
       break;
   }
 
-
   return (
     <Sidebar {...props}>
-        <SidebarHeader>
+      <SidebarHeader>
         <h2 className="py-2 text-2xl text-blue-600">Next.js Blog App</h2>
       </SidebarHeader>
       <SidebarContent>
